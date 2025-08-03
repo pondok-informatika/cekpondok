@@ -52,13 +52,13 @@ export const IntroModal: React.FC<IntroModalProps> = ({ onClose, dontShowAgain, 
               type="checkbox"
               checked={dontShowAgain}
               onChange={(e) => onDontShowAgainChange(e.target.checked)}
-              className="h-4 w-4 rounded text-blue-600 focus:ring-blue-500 border-gray-300"
+              className="h-4 w-4 rounded text-primary focus:ring-primary border-gray-300"
             />
             <span>Jangan tampilkan lagi</span>
           </label>
           <button
             onClick={onClose}
-            className="w-full md:w-auto bg-blue-600 text-white font-bold py-3 px-8 rounded-lg hover:bg-blue-700 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 shadow-lg hover:shadow-xl"
+            className="w-full md:w-auto bg-primary text-white font-bold py-3 px-8 rounded-lg hover:bg-opacity-90 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary shadow-lg hover:shadow-xl"
           >
             Mulai Jelajahi
           </button>
