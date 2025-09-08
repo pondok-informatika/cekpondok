@@ -7,7 +7,7 @@ import { DormitoryManagement } from './components/dormitory/DormitoryManagement'
 import { SantriDirectory } from './components/santri/SantriDirectory';
 import { AlumniDirectory } from './components/alumni/AlumniDirectory';
 import { InventoryList } from './components/inventaris/InventoryList';
-import { MasukanSantri } from './components/masukan/MasukanSantri';
+// import { MasukanSantri } from './components/masukan/MasukanSantri';
 import { IntroModal } from './components/ui/IntroModal';
 
 function App() {
@@ -37,12 +37,12 @@ function App() {
         return <AcademicProgress />;
       case 'dormitory':
         return <DormitoryManagement />;
-      case 'masukan':
-        return <MasukanSantri />;
+      // case 'masukan':
+      //   return <MasukanSantri />;
       case 'santri':
         return <SantriDirectory />;
-      case 'alumni':
-        return <AlumniDirectory />;
+      // case 'alumni':
+      //   return <AlumniDirectory />;
       case 'inventaris':
         return <InventoryList />;
       default:

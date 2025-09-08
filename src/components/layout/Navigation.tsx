@@ -22,8 +22,8 @@ export const Navigation: React.FC<NavigationProps> = ({ activeTab, onTabChange }
     { id: 'academic', label: 'Akademik', icon: BookOpen },
     { id: 'dormitory', label: 'Asrama', icon: Building },
     { id: 'santri', label: 'Data Santri', icon: Users },
-    { id: 'masukan', label: 'Masukan', icon: MessageCircle },
-    { id: 'alumni', label: 'Data Alumni', icon: Users },
+    // { id: 'masukan', label: 'Masukan', icon: MessageCircle },
+    // { id: 'alumni', label: 'Data Alumni', icon: Users },
     { id: 'inventaris', label: 'Inventaris', icon: Package },
   ];
 
