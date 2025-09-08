@@ -13,7 +13,6 @@ export const SantriDirectory: React.FC = () => {
   const [selectedSantriId, setSelectedSantriId] = useState<string | null>(null);
 
   const { data: santriMondokData, loading: santriMondokLoading, error: santriMondokError, refetch: refetchSantriMondok } = useApi<SantriApiResponse>('https://pesantrenteknologi.id/system/api/get/santri/status_santri/mondok');
-  const { data: santriMengabdiData, loading: santriMengabdiLoading, error: santriMengabdiError, refetch: refetchSantriMengabdi } = useApi<SantriApiResponse>('https://pesantrenteknologi.id/system/api/get/santri/status_santri/mengabdi');
   const { data: konsentrasiData, loading: konsentrasiLoading, error: konsentrasiError, refetch: refetchKonsentrasi } = useApi<KonsentrasiApiResponse>('https://pesantrenteknologi.id/system/api/get/konsentrasi');
   const { data: angkatanData, loading: angkatanLoading, error: angkatanError, refetch: refetchAngkatan } = useApi<AngkatanApiResponse>('https://pesantrenteknologi.id/system/api/get/angkatan');
 
@@ -29,8 +28,6 @@ export const SantriDirectory: React.FC = () => {
     return angkatan ? angkatan.angkatan : id;
   };
 
-  const allSantri = [...(santriMondokData?.data || []), ...(santriMengabdiData?.data || [])];
-
   const filteredSantriMondok = santriMondokData?.data ? santriMondokData.data.filter(santri =>
     santri.nama_lengkap_santri.toLowerCase().includes(searchTerm.toLowerCase()) ||
     getKonsentrasiName(santri.konsentrasi_santri).toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -39,17 +36,8 @@ export const SantriDirectory: React.FC = () => {
     santri.kota_domisili_sekarang_santri.toLowerCase().includes(searchTerm.toLowerCase())
   ) : [];
 
-  const filteredSantriMengabdi = santriMengabdiData?.data ? santriMengabdiData.data.filter(santri =>
-    santri.nama_lengkap_santri.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    getKonsentrasiName(santri.konsentrasi_santri).toLowerCase().includes(searchTerm.toLowerCase()) ||
-    getAngkatanName(santri.angkatan_santri).toLowerCase().includes(searchTerm.toLowerCase()) ||
-    santri.asal_daerah_santri.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    santri.kota_domisili_sekarang_santri.toLowerCase().includes(searchTerm.toLowerCase())
-  ) : [];
-
-  if (santriMondokLoading || santriMengabdiLoading || konsentrasiLoading || angkatanLoading) return <LoadingSpinner className="py-12" />;
+  if (santriMondokLoading || konsentrasiLoading || angkatanLoading) return <LoadingSpinner className="py-12" />;
   if (santriMondokError) return <ErrorMessage message={santriMondokError} onRetry={refetchSantriMondok} />;
-  if (santriMengabdiError) return <ErrorMessage message={santriMengabdiError} onRetry={refetchSantriMengabdi} />;
   if (konsentrasiError) return <ErrorMessage message={konsentrasiError} onRetry={refetchKonsentrasi} />;
   if (angkatanError) return <ErrorMessage message={angkatanError} onRetry={refetchAngkatan} />;
 
@@ -109,44 +97,6 @@ export const SantriDirectory: React.FC = () => {
             <div className="col-span-full text-center py-12">
               <Users className="h-12 w-12 text-gray-400 mx-auto mb-4" />
               <p className="text-gray-500">Tidak ada data santri mondok yang ditemukan.</p>
-            </div>
-          )}
-        </div>
-      </div>
-
-      <div className="space-y-6 mt-12">
-        <h3 className="text-xl font-bold flex items-center">
-          <Users className="h-5 w-5 mr-2" />
-          Santri Mengabdi
-        </h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredSantriMengabdi.length > 0 ? (
-            filteredSantriMengabdi.map((santri) => (
-              <Card key={santri.id_santri} className="p-6 shadow-lg rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-xl cursor-pointer" onClick={() => setSelectedSantriId(santri.id_santri)}>
-                <div className="flex items-center mb-4">
-                  {santri.foto_santri && (
-                    <img
-                      src={`https://pesantrenteknologi.id/system/assets/uploads/fotosantri/${santri.foto_santri}`}
-                      alt={santri.nama_lengkap_santri}
-                      className="w-16 h-16 rounded-full object-cover mr-4"
-                    />
-                  )}
-                  <div>
-                    <h3 className="text-xl font-semibold">{santri.nama_lengkap_santri}</h3>
-                    <p className="text-gray-700 text-sm mt-1 flex items-center"><Target className="h-4 w-4 mr-2 text-gray-600" /> {getKonsentrasiName(santri.konsentrasi_santri)}</p>
-                    <p className="text-.gray-700 text-sm mt-1 flex items-center"><Cake className="h-4 w-4 mr-2 text-gray-600" /> {calculateAge(santri.tanggal_lahir_santri)} Tahun</p>
-                  </div>
-                </div>
-                <div className="space-y-2 text-sm text-gray-700">
-                  <p className="flex items-center"><Calendar className="h-4 w-4 mr-2 text-gray-600" /> {getAngkatanName(santri.angkatan_santri)}</p>
-                  <p className="flex items-center"><MapPin className="h-4 w-4 mr-2 text-gray-600" /> {santri.asal_daerah_santri} / {santri.kota_domisili_sekarang_santri}</p>
-                </div>
-              </Card>
-            ))
-          ) : (
-            <div className="col-span-full text-center py-12">
-              <Users className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-              <p className="text-gray-500">Tidak ada data santri mengabdi yang ditemukan.</p>
             </div>
           )}
         </div>
