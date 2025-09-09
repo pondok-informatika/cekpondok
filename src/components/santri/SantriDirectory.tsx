@@ -5,7 +5,7 @@ import { SantriApiResponse, KonsentrasiApiResponse, AngkatanApiResponse } from '
 import { LoadingSpinner } from '../ui/LoadingSpinner';
 import { ErrorMessage } from '../ui/ErrorMessage';
 import { Card } from '../ui/Card';
-import { Users, Search, Target, Calendar, MapPin, Cake } from 'lucide-react';
+import { Users, Search, Target, Calendar, MapPin, Cake, Wallet } from 'lucide-react';
 import { calculateAge } from '../../utils/dateUtils';
 
 export const SantriDirectory: React.FC = () => {
@@ -90,6 +90,7 @@ export const SantriDirectory: React.FC = () => {
                 <div className="space-y-2 text-sm text-gray-700">
                   <p className="flex items-center"><Calendar className="h-4 w-4 mr-2 text-gray-600" /> {getAngkatanName(santri.angkatan_santri)}</p>
                   <p className="flex items-center"><MapPin className="h-4 w-4 mr-2 text-gray-600" /> {santri.asal_daerah_santri} / {santri.kota_domisili_sekarang_santri}</p>
+                  <p className="flex items-center"><Wallet className="h-4 w-4 mr-2 text-gray-600" /> {new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(Number(santri.saldo))}</p>
                 </div>
               </Card>
             ))

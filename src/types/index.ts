@@ -46,6 +46,7 @@ export interface SantriDetailData {
   foto_santri: string;
   musyrif: string;
   user: string;
+  saldo: string;
 }
 
 export interface SantriApiResponse {
@@ -130,6 +131,7 @@ export interface SantriProfile {
   foto_santri: string;
   musyrif: string;
   user: string;
+  saldo: string;
 }
 
 export interface SantriDetailResponse {

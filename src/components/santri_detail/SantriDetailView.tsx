@@ -4,7 +4,7 @@ import { SantriDetailResponse, KonsentrasiApiResponse, AngkatanApiResponse } fro
 import { LoadingSpinner } from '../ui/LoadingSpinner';
 import { ErrorMessage } from '../ui/ErrorMessage';
 import { Card } from '../ui/Card';
-import { Calendar, MapPin, Cake, Home, User, Users, BookOpen, Activity, Shield, Clock, GraduationCap, Award } from 'lucide-react';
+import { Calendar, MapPin, Cake, Home, User, Users, BookOpen, Activity, Shield, Clock, GraduationCap, Award, Wallet } from 'lucide-react';
 import { calculateAge } from '../../utils/dateUtils';
 
 interface SantriDetailViewProps {
@@ -87,6 +87,7 @@ export const SantriDetailView: React.FC<SantriDetailViewProps> = ({ santriId, on
                 <p className="flex items-start text-sm"><Home className="h-4 w-4 mr-2 text-blue-500 mt-1" /> <span className="font-medium ml-1" dangerouslySetInnerHTML={{ __html: profile.alamat_lengkap_santri }}></span></p>
                 <p className="flex items-center text-sm"><Users className="h-4 w-4 mr-2 text-blue-500" />Keluarga<span className="font-medium ml-1">{profile.kondisi_keluarga_santri}</span></p>
                 <p className="flex items-center text-sm"><Users className="h-4 w-4 mr-2 text-blue-500" /> Anak ke: <span className="font-medium ml-1">{profile.anak_ke_santri} dari {profile.jumlah_saudara_santri} bersaudara</span></p>
+                <p className="flex items-center text-sm"><Wallet className="h-4 w-4 mr-2 text-blue-500" /> Saldo: <span className="font-medium ml-1">{new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(Number(profile.saldo))}</span></p>
 
               </div>
             </Card>
